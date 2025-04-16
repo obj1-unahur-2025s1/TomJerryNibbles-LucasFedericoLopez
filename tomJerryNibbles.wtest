@@ -1,17 +1,60 @@
 import tomJerryNibbles.*
 
-describe "Grupo de test" {
+describe "Test de TomJerryNibbles" {
 
-  test "test 1" {
-    assert.equals(100, 50+50)
+  test "la velocidad maxima al inicio de tom es de 10" {
+    assert.equals(10, tom.velocidadMax())
+    assert.equals(50, tom.energia())
   }
 
-  test "test 3" {
-    assert.that(true)
+  test "Al comer a Jerry la velocidad de tom es de 15.2" {
+    tom.comer(jerry)
+    assert.equals(15.2, tom.velocidadMax())
+    assert.equals(102, tom.energia())
+  }
+  test "Al correr 24 metros la velocidad maxima de tom es de 14 y su energia de 90" {
+    tom.comer(jerry)
+    tom.correr(24)
+    assert.equals(14, tom.velocidadMax())
+    assert.equals(90, tom.energia())
+  }
+  test "Al comer a Nibbles su velocidad maxima es de 18.7 y su energia es 137" {
+    tom.comer(jerry)
+    tom.comer(nibbles)
+    tom.correr(24)
+    assert.equals(18.7, tom.velocidadMax())
+    assert.equals(137, tom.energia())
+  }
+  test "Jerry cumple 3 años y tom lo vuelve a comer, su velocidad maxima ahora es de 25.9 y su energia de 209" {
+    tom.comer(jerry)
+    tom.comer(nibbles)
+    jerry.cumplirAños()
+    tom.comer(jerry)
+    tom.correr(24)
+    assert.equals(25.9, tom.velocidadMax())
+    assert.equals(209, tom.energia())
+  }
+  test "Si corre 38 metros su velocidad maxima pasa a ser de 24 y su energia 190" {
+    tom.comer(jerry)
+    tom.comer(nibbles)
+    jerry.cumplirAños()
+    tom.comer(jerry)
+    tom.correr(24)
+    assert.equals(25.9, tom.velocidadMax())
+    assert.equals(209, tom.energia())
+    tom.correr(38)
+  }
+  test "tom puede cazar un raton que está a 99 metros" {
+    assert.that(tom.puedeCazar(99))
   }
 
-  test "test 4" {
-    assert.notThat(false)
+  test "tom no puede cazar un ratón a 120 metros" {
+    assert.notThat(tom.puedeCazar(120))
   }
 
+  test "tom caza a nibbles que está a 50 metros y la velocidad máxima es 12.2 y su energia 72" {
+    tom.cazar(nibbles,50)
+    assert.equals(12.2,tom.velocidadMax())
+    assert.equals(72, tom.energia())
+  }
 }
